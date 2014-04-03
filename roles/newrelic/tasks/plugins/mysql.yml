@@ -27,7 +27,7 @@
 
 
 - name: copy newrelic license key
-  template: src=roles/monitor-database/templates/newrelic_mysql.properties.j2
+  template: src=roles/newrelic/templates/newrelic_mysql.properties.j2
             dest={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}/config/newrelic.properties
             owner={{ user }}
             group={{ user }}
@@ -35,7 +35,7 @@
 
 
 - name: copy newrelic mysql instance properties
-  template: src=roles/monitor-database/templates/mysql.instance.json.j2
+  template: src=roles/newrelic/templates/mysql.instance.json.j2
             dest={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}/config/mysql.instance.json
             owner={{ user }}
             group={{ user }}
@@ -43,7 +43,7 @@
 
 
 - name: copy newrelic mysql logging properties
-  template: src=roles/monitor-database/templates/logging.properties.j2
+  template: src=roles/newrelic/templates/logging.properties.j2
             dest={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}/config/logging.properties
             owner={{ user }}
             group={{ user }}
@@ -51,7 +51,7 @@
 
 
 - name: copy newrelic mysql instance upstart job
-  template: src=roles/monitor-database/templates/newrelic-mysql.j2
+  template: src=roles/newrelic/templates/newrelic-mysql.j2
             dest=/etc/init.d/newrelic-mysql
             owner=root
             group=root

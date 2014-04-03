@@ -27,7 +27,7 @@
 
 
 - name: copy new relic nginx agent configuration
-  template: src=roles/monitor-web/templates/newrelic_nginx_plugin.yml.j2
+  template: src=roles/newrelic/templates/newrelic_nginx_plugin.yml.j2
             dest={{ newrelic_download }}nginx/newrelic_nginx_agent/config/newrelic_plugin.yml
             owner={{ user }}
             group={{ user }}

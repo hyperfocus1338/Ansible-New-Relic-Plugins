@@ -1,0 +1,11 @@
+description "MySQL NewRelic Plugin"
+author "Michael Restuccia"
+ 
+start on runlevel [3]
+stop on shutdown
+ 
+script
+      cd {{ newrelic_mysql_path }}
+      java -jar newrelic-mysql.jar >{{ newrelic_mysql_log }} 2>&1
+      emit newrelic-mysql_running
+end script
