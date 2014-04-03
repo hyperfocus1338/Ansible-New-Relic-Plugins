@@ -1,0 +1,5 @@
+---
+- name: install java 7
+  apt: pkg=openjdk-7-jre-headless
+       state=latest
+       update_cache=yes

@@ -1,6 +1,14 @@
 ---
+- name: java installation
+  hosts: all
+  sudo: true
+  user: root
+  roles:
+  - java
+
+
 - name: newrelic monitoring
-  hosts: web
+  hosts: all
   sudo: true
   user: root
   roles:

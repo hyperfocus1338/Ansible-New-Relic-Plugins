@@ -1,0 +1,2 @@
+[all]
+192.168.7.5 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_sudo_pass=vagrant
