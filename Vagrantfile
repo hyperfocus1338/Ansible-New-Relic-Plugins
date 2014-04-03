@@ -54,10 +54,6 @@ Vagrant.configure("2") do |config|
 # Hosts
 #
 		ansible.limit = "all"
-#		ansible.limit = "web"
-#		ansible.limit = "database"
-#		ansible.limit = "cache"
-
 		ansible.inventory_path = "development"
 
 	end
