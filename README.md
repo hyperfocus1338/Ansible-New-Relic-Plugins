@@ -1,4 +1,4 @@
-Ansible-New-Relic-Plugins
+Ansible New Relic Plugins
 ========================
 
 Ansible playbook which will install the New Relic, MySQL and Nginx monitor. Since New Relic only has pre-configured automated installs with Puppet and Chef, I had to create these by myself.
@@ -10,7 +10,7 @@ What's included?
 
 - Java installation
 - New Relic system monitor
-- New Relic php monitor
+- New Relic PHP monitor
 - New Relic Nginx plugin
 - New Relic MySQL plugin (not working yet)
 
