@@ -13,7 +13,7 @@
 #          required in order for the server monitor to start.
 # Default: none
 #
-{{ newrelic_license_key }}
+license_key=REPLACE_WITH_REAL_KEY
 
 #
 # Option : loglevel
@@ -28,7 +28,7 @@
 # Default: error
 # Note   : Can also be set with the -d command line option.
 #
-{{ newrelic_sysmond_loglevel }}
+loglevel=info
 
 #
 # Option : logfile
@@ -38,7 +38,7 @@
 # Default: none. However it is highly recommended you set a value for this.
 # Note   : Can also be set with the -l command line option.
 #
-{{ newrelic_sysmond_logfile }}
+logfile=/var/log/newrelic/nrsysmond.log
 
 #
 # Option : proxy
@@ -51,8 +51,7 @@
 #            fred:secret@proxy.mydomain.com:8181
 # Default: none (use a direct connection)
 #
-{{ newrelic_proxy }}
-
+#proxy=
 
 #
 # Option : ssl
@@ -62,7 +61,7 @@
 #          the SSL certificates settings below.
 # Default: false
 #
-{{ newrelic_sysmond_ssl }}
+#ssl=false
 
 #
 # Option : ssl_ca_bundle
@@ -75,8 +74,7 @@
 #          /etc/pki/tls/certs/ca-bundle.crt
 # Note   : Can also be set with the -b command line option.
 #
-{{ newrelic_sysmond_ssl_ca_bundle }}
-
+#ssl_ca_bundle=/path/to/your/bundle.crt
 
 #
 # Option : ssl_ca_path
@@ -86,8 +84,7 @@
 # Default: /etc/ssl/certs
 # Note   : Can also be set with the -S command line option.
 #
-{{ newrelic_sysmond_ssl_ca_path }}
-
+#ssl_ca_path=/etc/ssl/certs
 
 #
 # Option : pidfile
@@ -98,7 +95,7 @@
 # Default: /tmp/nrsysmond.pid
 # Note   : Can also be set with the -p command line option.
 #
-{{ newrelic_sysmond_pidfile }}
+#pidfile=/var/run/newrelic/nrsysmond.pid
 
 #
 # Option : collector_host
@@ -109,7 +106,7 @@
 #          if SSL is enabled. If the port is omitted the default value is used.
 # Default: collector.newrelic.com
 #
-{{ newrelic_collector_host }}
+#collector_host=collector.newrelic.com
 
 #
 # Option : timeout
@@ -123,4 +120,5 @@
 #          once the original connection has been made. The value is in seconds.
 # Default: 30
 #
-{{ newrelic_sysmond_timeout }}
+#timeout=30
+

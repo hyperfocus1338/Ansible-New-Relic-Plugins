@@ -51,7 +51,7 @@
 #          which process to monitor or kill.
 # Default: OS-dependent. Uses a filename of newrelic-daemon.pid in the first
 #          directory from the list /var/run or /var/pid that is found.
-{{ newrelic_pidfile }}
+#pidfile=/var/run/newrelic-daemon.pid
 
 #
 # Setting: logfile
@@ -61,7 +61,7 @@
 #          will not start up. The amount of information sent to this file is
 #          controlled by the loglevel settings, defined below.
 # Default: /var/log/newrelic/newrelic-daemon.log
-{{ newrelic_logfile }}
+#logfile=/var/log/newrelic/newrelic-daemon.log
 
 #
 # Setting: loglevel
@@ -78,7 +78,7 @@
 #          debug - very verbose, includes messages only relevant to support
 #          verbosedebug - extremely verbose, creates massive log files
 # Default: info
-{{ newrelic_loglevel }}
+#loglevel=info
 
 #
 # Setting: port
@@ -94,7 +94,7 @@
 #          started by the super-user. This is a fundamental OS limitation
 #          and not one imposed by the daemon itself.
 # Default: "/tmp/.newrelic.sock"
-{{ newrelic_port }}
+#port="/tmp/.newrelic.sock"
 
 #
 # Setting: ssl
@@ -103,7 +103,7 @@
 #          when communicating with the New Relic collector servers, set this
 #          to true.
 # Default: true (as of version 3.6)
-{{ newrelic_ssl }}
+#ssl=true
 
 #
 # Setting: proxy
@@ -120,7 +120,7 @@
 #          someuser@proxy.mydomain.com:4321
 #          proxy.mydomain.com
 # Default: none
-{{ newrelic_proxy }}
+#proxy=
 
 #
 # Setting: collector_host
@@ -132,7 +132,7 @@
 #          circumstances, and then only on instruction from a New Relic sales
 #          person or support staff member.
 # Default: collector.newrelic.com
-{{ newrelic_collector_host }}
+#collector_host=collector.newrelic.com
 
 #
 # Setting: auditlog
@@ -146,4 +146,4 @@
 #          If you set it to the same name audit logging will be silently
 #          ignored.
 # Default: None
-{{ newrelic_audit_log }}
+#auditlog=/var/log/newrelic/audit.log

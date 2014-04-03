@@ -1,0 +1,6 @@
+---
+- include: bootstrap.yml
+  tags: bootstrap
+
+- include: python.yml
+  tags: python

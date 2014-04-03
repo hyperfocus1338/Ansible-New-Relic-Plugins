@@ -4,101 +4,12 @@
 newrelic_license_key: license_key=xxx
 
 
-# default #proxy=
-#
-newrelic_proxy: "#proxy="
-#
-###
-
-
-
 ### php
 #
 php_agent_log: /var/log/newrelic/php_agent.log
-
 
 
 ### nginx agent
 #
 newrelic_nginx_verbose: 1
 nginx_status_url: http://website.com/nginx_stub_status
-
-
-
-### newrelic.cfg
-#
-
-# default #pidfile=/var/run/newrelic-daemon.pid
-#
-newrelic_pidfile: "#pidfile=/var/run/newrelic-daemon.pid"
-
-
-# default #logfile=/var/log/newrelic/newrelic-daemon.log
-#
-newrelic_logfile: "#logfile=/var/log/newrelic/newrelic-daemon.log"
-
-
-# default #logfile=/var/log/newrelic/newrelic-daemon.log
-#
-newrelic_loglevel: "#loglevel==info"
-
-
-# default #port="/tmp/.newrelic.sock"
-#
-# Haakjes weggehaald ivm syntax error
-#
-newrelic_port: "#port=/tmp/.newrelic.sock"
-
-
-# default #ssl=true
-#
-newrelic_ssl: "#ssl=true"
-
-
-# default #collector_host=collector.newrelic.com
-#
-newrelic_collector_host: "#collector_host=collector.newrelic.com"
-
-
-# default #auditlog=/var/log/newrelic/audit.log
-#
-newrelic_audit_log: "#auditlog=/var/log/newrelic/audit.log"
-
-
-
-### nrsysmond.cfg
-#
-
-# default loglevel=info
-#
-newrelic_sysmond_loglevel: "loglevel=info"
-
-
-# default logfile=/var/log/newrelic/nrsysmond.log
-#
-newrelic_sysmond_logfile: "logfile=/var/log/newrelic/nrsysmond.log"
-
-
-# default #ssl=false
-#
-newrelic_sysmond_ssl: "#ssl=false"
-
-
-# default #ssl_ca_bundle=/path/to/your/bundle.crt
-#
-newrelic_sysmond_ssl_ca_bundle: "#ssl_ca_bundle=/path/to/your/bundle.crt"
-
-
-# default #ssl_ca_path=/etc/ssl/certs
-#
-newrelic_sysmond_ssl_ca_path: "#ssl_ca_path=/etc/ssl/certs"
-
-
-# default #pidfile=/var/run/newrelic/nrsysmond.pid
-#
-newrelic_sysmond_pidfile: "#pidfile=/var/run/newrelic/nrsysmond.pid"
-
-
-# default #timeout=30
-#
-newrelic_sysmond_timeout: "#timeout=30"

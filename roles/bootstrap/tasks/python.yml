@@ -1,0 +1,40 @@
+---
+- name: download python distribute
+  get_url: url=http://python-distribute.org/distribute_setup.py
+           dest={{ downloads }}python/distribute_setup.py
+           force=no
+
+- name: install python distribute
+  command: python distribute_setup.py chdir={{ downloads }}python
+
+- name: delete python distribute download
+  file: path={{ downloads }}python/distribute_setup.py
+        state=absent
+
+
+
+- name: download python pip
+  get_url: url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+           dest={{ downloads }}python/get-pip.py
+           force=no
+
+- name: install python pip
+  command: python get-pip.py chdir={{ downloads }}python
+
+- name: delete python pip download
+  file: path={{ downloads }}python/get-pip.py
+        state=absent
+
+
+
+- name: install python dependencies
+  apt: pkg={{ item }}
+       state=present
+       update_cache=yes
+
+  with_items:
+  - python-keyczar
+  - python-software-properties
+  - python-configparser
+  - python-pycurl
+  - python-setuptools

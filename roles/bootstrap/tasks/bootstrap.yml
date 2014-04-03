@@ -1,0 +1,44 @@
+---
+- name: create administrative user group
+  group: name={{ user_group }}
+         state=present
+
+
+- name: create administrative user
+  user: name={{ user }}
+        uid={{ user_uid }}
+        home={{ user_home }}
+        shell={{ user_shell }}
+        password={{ user_password }}
+        group={{ user_group }}
+        groups={{ ",".join(user_groups) }}
+        comment="{{ user_comment }}"
+        append={{ user_append }}
+        update_password=always
+        state=present
+
+
+- name: make download folders
+  file: path={{ item }}
+        state=directory
+        recurse=yes
+        owner={{ user }}
+        group={{ user }}
+        mode=0755
+
+  with_items:
+  - "{{ downloads }}"
+  - "{{ downloads }}python/"
+
+
+- name: install utilities
+  apt: pkg={{ item }}
+       state=present
+       update_cache=yes
+
+  with_items:
+  - software-properties-common
+  - build-essential
+  - subversion
+  - git
+  - unzip
