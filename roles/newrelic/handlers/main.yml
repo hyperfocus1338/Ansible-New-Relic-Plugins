@@ -1,0 +1,34 @@
+---
+- name: start new relic
+  service: name=newrelic-sysmond state=started
+
+- name: stop new relic
+  service: name=newrelic-sysmond state=stopped
+
+- name: restart new relic
+  service: name=newrelic-sysmond state=restarted
+
+
+
+- name: status new relic nginx
+  service: name="newrelic_nginx_agent.daemon" state=status
+
+- name: start new relic nginx
+  service: name="newrelic_nginx_agent.daemon" state=started
+
+- name: restart new relic nginx
+  service: name="newrelic_nginx_agent.daemon" state=restarted
+
+- name: stop new relic nginx
+  service: name="newrelic_nginx_agent.daemon" state=stopped
+
+
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: restart php-fpm
+  service: name=php5-fpm state=restarted
+
+- name: restart mysql
+  service: name=mysql state=restarted

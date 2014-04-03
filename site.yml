@@ -1,0 +1,10 @@
+---
+- name: newrelic monitoring
+  hosts: web
+  sudo: true
+  user: root
+  roles:
+  - newrelic
+
+  vars_files:
+  - newrelic

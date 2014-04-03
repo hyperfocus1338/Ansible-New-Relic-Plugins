@@ -1,0 +1,88 @@
+---
+- name: make newrelic downloads folders
+  file: path={{ item }}
+        state=directory
+        recurse=yes
+        owner={{ user }}
+        group={{ user }}
+        mode=0755
+
+  with_items:
+  - "{{ newrelic_download }}"
+
+
+- name: add newrelic repo to apt sources
+  template: src=newrelic.list.j2
+            dest=/etc/apt/sources.list.d/newrelic.list
+            group=root
+            owner=root
+            mode=0644
+
+
+- name: add new relic repo key
+  apt_key: url=https://download.newrelic.com/548C16BF.gpg
+           id=548C16BF
+           state=present
+
+
+- name: install new relic
+  apt: pkg={{ item }}
+       state=present
+       update_cache=yes
+
+  with_items:
+  - newrelic-php5
+  - newrelic-sysmond
+
+
+- name: copy new relic configuration
+  template: src=newrelic.cfg.j2
+            dest=/etc/newrelic/newrelic.cfg
+            group=newrelic
+            owner=root
+            mode=0640
+  notify: restart new relic
+
+
+- name: copy new relic system monitor configuration
+  template: src=nrsysmond.cfg.j2
+            dest=/etc/newrelic/nrsysmond.cfg
+            group=newrelic
+            owner=root
+            mode=0640
+  notify: restart new relic
+
+
+- name: copy new relic php configuration
+  template: src=newrelic.ini.j2
+            dest=/etc/php5/mods-available/newrelic.ini
+            group=root
+            owner=root
+            mode=0644
+  notify: restart new relic
+
+
+- name: make new relic php symbolic links
+  file: src=/etc/php5/mods-available/newrelic.ini
+        dest={{ item }}
+        state=link
+        group=root
+        owner=root
+        mode=777
+
+  with_items:
+  - /etc/php5/fpm/conf.d/05-newrelic.ini
+  - /etc/php5/cli/conf.d/05-newrelic.ini
+
+
+- name: configure init script
+  command: /usr/sbin/update-rc.d newrelic-daemon defaults 90 10
+
+
+- name: enable init script
+  command: /usr/sbin/update-rc.d newrelic-daemon enable
+  notify:
+  - restart new relic
+  - restart nginx
+  - restart php-fpm
+  - restart mysql

@@ -1,0 +1,27 @@
+newrelic:
+  #
+  # Update with your New Relic account license key:
+  #
+  license_key: '{{ newrelic_license_key }}'
+  #
+  # Set to '1' for verbose output, remove for normal output.
+  # All output goes to stdout/stderr.
+  #
+  verbose: {{ newrelic_nginx_verbose }}
+
+#
+# Agent Configuration, describe your nginx instances here
+#
+agents:
+  nginx_status_agent:
+    -
+      instance_name: {{ servername }}
+      status_url: {{ nginx_status_url }}
+#      http_user: status
+#      http_pass: status_pass
+#    -
+#      instance_name: example.org
+#      status_url: http://example.org/status
+#    -
+#      instance_name: example.com
+#      status_url: http://example.com/status

@@ -1,0 +1,63 @@
+---
+- name: make newrelic nginx download folder
+  file: path={{ item }}
+        state=directory
+        recurse=yes
+        owner={{ user }}
+        group={{ user }}
+        mode=0755
+
+  with_items:
+  - "{{ newrelic_download }}nginx/"
+
+
+- name: download nginx plugin
+  get_url: url=http://nginx.com/download/newrelic/newrelic_nginx_agent.tar.gz
+           dest={{ newrelic_download }}nginx/newrelic_nginx_agent.tar.gz
+           force=no
+
+
+- name: extract new relic nginx agent archive
+  command: tar -xzvf newrelic_nginx_agent.tar.gz chdir={{ newrelic_download }}nginx/ creates={{ newrelic_download }}nginx/newrelic_nginx_agent
+
+
+- name: remove new relic nginx agent archive
+  file: path={{ newrelic_download }}nginx/newrelic_nginx_agent.tar.gz
+        state=absent
+
+
+- name: copy new relic nginx agent configuration
+  template: src=roles/monitor-web/templates/newrelic_nginx_plugin.yml.j2
+            dest={{ newrelic_download }}nginx/newrelic_nginx_agent/config/newrelic_plugin.yml
+            owner={{ user }}
+            group={{ user }}
+            mode=0664
+
+
+- name: bundle install
+  command: /bin/bash --login -c "cd {{ newrelic_download }}nginx/newrelic_nginx_agent && bundle install"
+
+
+- name: make new relic nginx agent symbolic link 
+  file: src={{ newrelic_download }}nginx/newrelic_nginx_agent/newrelic_nginx_agent.daemon
+        dest=/etc/init.d/newrelic_nginx_agent.daemon
+        state=link
+        owner=root
+        group=root
+        mode=0755
+
+
+- name: let ubuntu know about the new init script
+  command: update-rc.d newrelic_nginx_agent.daemon defaults
+
+
+- name: start new relic nginx daemon
+  command: ./newrelic_nginx_agent.daemon start chdir={{ newrelic_download }}nginx/newrelic_nginx_agent/
+
+
+# Nginx
+# https://rpm.newrelic.com/accounts/573861/plugins/directory/13
+# http://kx.cloudingenium.com/technologies/new-relic/install-nginx-agent-newrelic-ubuntu-server/
+
+# MeetMe Nginx
+# https://rpm.newrelic.com/accounts/573861/plugins/directory/56

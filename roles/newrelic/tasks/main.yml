@@ -1,0 +1,7 @@
+---
+- include: newrelic.yml
+  tags: newrelic_web
+
+
+- include: plugins/nginx.yml
+  tags: newrelic_nginx

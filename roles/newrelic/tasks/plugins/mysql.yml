@@ -1,0 +1,87 @@
+---
+- name: make newrelic mysql download folder
+  file: path={{ item }}
+        state=directory
+        recurse=yes
+        owner={{ user }}
+        group={{ user }}
+        mode=0755
+
+  with_items:
+  - "{{ newrelic_download }}mysql/"
+
+
+- name: download mysql plugin archive
+  get_url: url=https://rpm.newrelic.com/plugins/52/71eb0503aa2eb4be064e202bc6fe0299
+           dest={{ newrelic_download }}mysql/{{ newrelic_mysql_archive }}
+           force=no
+
+
+- name: unpack mysql plugin archive
+  command: tar -zxvf {{ newrelic_mysql_archive }} chdir={{ newrelic_download }}mysql/ creates={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}
+
+
+- name: remove new relic mysql archive
+  file: path={{ newrelic_download }}mysql/{{ newrelic_mysql_archive }}
+        state=absent
+
+
+- name: copy newrelic license key
+  template: src=roles/monitor-database/templates/newrelic_mysql.properties.j2
+            dest={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}/config/newrelic.properties
+            owner={{ user }}
+            group={{ user }}
+            mode=0664
+
+
+- name: copy newrelic mysql instance properties
+  template: src=roles/monitor-database/templates/mysql.instance.json.j2
+            dest={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}/config/mysql.instance.json
+            owner={{ user }}
+            group={{ user }}
+            mode=0664
+
+
+- name: copy newrelic mysql logging properties
+  template: src=roles/monitor-database/templates/logging.properties.j2
+            dest={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}/config/logging.properties
+            owner={{ user }}
+            group={{ user }}
+            mode=0664
+
+
+- name: copy newrelic mysql instance upstart job
+  template: src=roles/monitor-database/templates/newrelic-mysql.j2
+            dest=/etc/init.d/newrelic-mysql
+            owner=root
+            group=root
+            mode=0755
+
+
+- name: make newrelic 127.0.0.1 database user
+  mysql_user: name={{ newrelic_user }}
+              password={{ newrelic_user_password }}
+              priv="*.*:PROCESS,REPLICATION CLIENT"
+              host={{ newrelic_user_tcp_host }}
+              login_host={{ mysql_host }}
+              login_user={{ mysql_root_user }}
+              login_password={{ mysql_root_password }}
+              state=present
+
+
+- name: make newrelic localhost database user
+  mysql_user: name={{ newrelic_user }}
+              password={{ newrelic_user_password }}
+              priv="*.*:PROCESS,REPLICATION CLIENT"
+              host={{ newrelic_user_socket_host }}
+              login_host={{ mysql_host }}
+              login_user={{ mysql_root_user }}
+              login_password={{ mysql_root_password }}
+              state=present
+
+
+#- name: run the mysql monitor
+#  shell: java -Xmx128m -jar {{ newrelic_jar }} & chdir={{ newrelic_download }}mysql/{{ newrelic_mysql_folder }}
+
+
+# https://rpm.newrelic.com/accounts/573861/plugins/directory/52

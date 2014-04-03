@@ -1,0 +1,33 @@
+# MySQL
+#
+mysql_host: localhost
+mysql_root_user: root
+mysql_root_password: xxx
+
+
+### Download folder
+#
+newrelic_download: /home/hyper/downloads/newrelic/
+
+
+### NewRelic plugins
+#
+newrelic_mysql_path: /etc/
+newrelic_mysql_log: /var/log/newrelic-mysql.log
+
+
+# MySQL plugin
+# https://rpm.newrelic.com/accounts/573861/plugins/directory/52
+#
+newrelic_mysql_jar: newrelic_mysql_plugin-1.2.1.jar
+newrelic_mysql_folder: newrelic_mysql_plugin-1.2.1
+newrelic_mysql_archive: newrelic_mysql_plugin-1.2.1.tar.gz
+
+
+# MySQL user
+#
+newrelic_user: newrelic
+newrelic_user_password: AS4MDXhUIyITUX
+
+newrelic_user_tcp_host: 127.0.0.1
+newrelic_user_socket_host: localhost
