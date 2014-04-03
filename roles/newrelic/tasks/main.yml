@@ -5,3 +5,7 @@
 
 - include: plugins/nginx.yml
   tags: newrelic_nginx
+
+
+- include: plugins/mysql.yml
+  tags: newrelic_mysql
